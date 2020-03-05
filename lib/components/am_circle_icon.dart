@@ -37,7 +37,7 @@ class AMCircleIcon extends StatelessWidget {
       ),
       child: Icon(
         icon,
-        color: color ?? theme.iconTheme.color,
+        color: color ?? theme.accentColor,
         semanticLabel: semanticLabel,
         size: size,
         textDirection: textDirection,
