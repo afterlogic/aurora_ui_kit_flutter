@@ -29,11 +29,11 @@ class AMDialog extends StatelessWidget {
     this.titleTextStyle,
   }) : super(key: key);
 
-  static Future<T> show<T>(
-    BuildContext context,
-    Widget Function(BuildContext) builder,
-    bool useRootNavigator,
-  ) {
+  static Future<T> show<T>({
+    @required BuildContext context,
+    @required Widget Function(BuildContext) builder,
+    bool useRootNavigator = true,
+  }) {
     return showCupertinoDialog(context: context, builder: builder);
   }
 
