@@ -67,7 +67,7 @@ class AMButton extends StatelessWidget {
             : [
                 shadow ??
                     BoxShadow(
-                      color: color ?? theme.buttonColor,
+                      color: color ?? theme.buttonTheme.colorScheme.background,
                       blurRadius: 8.0,
                       offset: Offset(0.0, 3.0),
                     ),
