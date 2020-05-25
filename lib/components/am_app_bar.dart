@@ -112,7 +112,7 @@ class _AMAppBarState extends State<AMAppBar> {
     if (widget.leading == null && widget.automaticallyImplyLeading) {
       if (hasDrawer) {
         return IconButton(
-          icon: const Icon(Icons.sort),
+          icon: const Icon(Icons.menu),
           onPressed: _handleDrawerButton,
           tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
         );
