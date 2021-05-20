@@ -102,7 +102,7 @@ class _AMAppBarState extends State<AMAppBar> {
   }
 
   Widget get _leading {
-    final ScaffoldState scaffold = Scaffold.of(context, nullOk: true);
+    final ScaffoldState scaffold = Scaffold.of(context);
     final ModalRoute<dynamic> parentRoute = ModalRoute.of(context);
 
     final bool hasDrawer = scaffold?.hasDrawer ?? false;
@@ -138,7 +138,7 @@ class _AMAppBarState extends State<AMAppBar> {
   }
 
   List<Widget> get actions {
-    final ScaffoldState scaffold = Scaffold.of(context, nullOk: true);
+    final ScaffoldState scaffold = Scaffold.of(context);
     final bool hasEndDrawer = scaffold?.hasEndDrawer ?? false;
 
     if ((widget.actions == null || widget.actions.isEmpty) && hasEndDrawer) {
