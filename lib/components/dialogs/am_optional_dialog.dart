@@ -17,34 +17,34 @@ class AMOptionalDialog extends StatefulWidget {
   final List<Widget> actions;
 
   const AMOptionalDialog({
-    Key key,
     this.title,
     this.description,
     @required this.options,
     @required this.actionText,
     @required this.cancelText,
     this.actions,
-  }) : super(key: key);
+  });
 
-  static Future<bool> show(
+  static Future<OptionalResult> show({
     BuildContext context,
     String title,
     String description,
     Map<String, bool> options,
     String actionText,
-    String cancelText, {
+    String cancelText,
     List<Widget> actions,
   }) {
     return showCupertinoDialog(
         context: context,
-        builder: (_) => AMOptionalDialog(
+        builder: (_) =>
+            AMOptionalDialog(
               title: title,
               description: description,
               options: options,
               actionText: actionText,
               cancelText: cancelText,
               actions: actions,
-            )).then((value) => (value as bool) ?? false);
+            ));
   }
 
   @override
@@ -109,18 +109,20 @@ class _OptionalDialogState extends State<AMOptionalDialog> {
       actions: <Widget>[
         FlatButton(
           child: Text(cancelText ?? "Cancel"),
-          onPressed: () => Navigator.pop(
-            context,
-            OptionalResult(generalResult: false, options: options),
-          ),
+          onPressed: () =>
+              Navigator.pop(
+                context,
+                OptionalResult(generalResult: false, options: options),
+              ),
         ),
         if (actions != null) ...actions,
         FlatButton(
           child: Text(actionText ?? "OK"),
-          onPressed: () => Navigator.pop(
-            context,
-            OptionalResult(generalResult: true, options: options),
-          ),
+          onPressed: () =>
+              Navigator.pop(
+                context,
+                OptionalResult(generalResult: true, options: options),
+              ),
         ),
       ],
     );
