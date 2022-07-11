@@ -2,20 +2,20 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class AMDialog extends StatelessWidget {
-  final List<Widget> actions;
-  final Color backgroundColor;
-  final Widget content;
+  final List<Widget>? actions;
+  final Color? backgroundColor;
+  final Widget? content;
   final EdgeInsetsGeometry contentPadding;
-  final TextStyle contentTextStyle;
-  final double elevation;
-  final String semanticLabel;
-  final ShapeBorder shape;
-  final Widget title;
-  final EdgeInsetsGeometry titlePadding;
-  final TextStyle titleTextStyle;
+  final TextStyle? contentTextStyle;
+  final double? elevation;
+  final String? semanticLabel;
+  final ShapeBorder? shape;
+  final Widget? title;
+  final EdgeInsetsGeometry? titlePadding;
+  final TextStyle? titleTextStyle;
 
   const AMDialog({
-    Key key,
+    Key? key,
     this.actions,
     this.backgroundColor,
     this.content,
@@ -29,12 +29,15 @@ class AMDialog extends StatelessWidget {
     this.titleTextStyle,
   }) : super(key: key);
 
-  static Future<T> show<T>({
-    @required BuildContext context,
-    @required Widget Function(BuildContext) builder,
+  static Future<T?> show<T>({
+    required BuildContext context,
+    required Widget Function(BuildContext) builder,
     bool useRootNavigator = true,
   }) {
-    return showCupertinoDialog(context: context, builder: builder);
+    return showCupertinoDialog<T>(
+      context: context,
+      builder: builder,
+    );
   }
 
   @override

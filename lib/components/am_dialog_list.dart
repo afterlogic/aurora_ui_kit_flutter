@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 class AMDialogList extends StatelessWidget {
   final List<Widget> children;
 
-  const AMDialogList({Key key, @required this.children}) : super(key: key);
+  const AMDialogList({
+    Key? key,
+    required this.children,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

@@ -1,27 +1,27 @@
 import 'package:flutter/material.dart';
 
 class AMAppBar extends StatefulWidget implements PreferredSizeWidget {
-  final Widget title;
-  final List<Widget> actions;
-  final Widget leading;
-  final IconThemeData actionsIconTheme;
+  final Widget? title;
   final bool centerTitle;
+  final List<Widget>? actions;
+  final Widget? leading;
+  final IconThemeData? actionsIconTheme;
   final bool automaticallyImplyLeading;
-  final Color backgroundColor;
-  final PreferredSizeWidget bottom;
+  final Color? backgroundColor;
+  final PreferredSizeWidget? bottom;
   final double bottomOpacity;
-  final Brightness brightness;
-  final BoxShadow shadow;
-  final Widget flexibleSpace;
-  final IconThemeData iconTheme;
+  final Brightness? brightness;
+  final BoxShadow? shadow;
+  final Widget? flexibleSpace;
+  final IconThemeData? iconTheme;
   final bool primary;
-  final ShapeBorder shape;
-  final TextTheme textTheme;
+  final ShapeBorder? shape;
   final double titleSpacing;
   final double toolbarOpacity;
+  final TextStyle? textStyle;
 
   const AMAppBar({
-    Key key,
+    Key? key,
     this.title,
     this.centerTitle = true,
     this.actions,
@@ -37,9 +37,9 @@ class AMAppBar extends StatefulWidget implements PreferredSizeWidget {
     this.iconTheme,
     this.primary = true,
     this.shape,
-    this.textTheme,
     this.titleSpacing = NavigationToolbar.kMiddleSpacing,
     this.toolbarOpacity = 1.0,
+    this.textStyle,
   }) : super(key: key);
 
   @override
@@ -50,7 +50,6 @@ class AMAppBar extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _AMAppBarState extends State<AMAppBar> {
-
   void _handleBackButton() {
     Navigator.maybePop(context);
   }
@@ -65,7 +64,6 @@ class _AMAppBarState extends State<AMAppBar> {
 
   @override
   Widget build(BuildContext context) {
-
     return PreferredSize(
       preferredSize: widget.preferredSize,
       child: Container(
@@ -81,19 +79,18 @@ class _AMAppBarState extends State<AMAppBar> {
           leading: _leading,
           centerTitle: widget.centerTitle,
           title: widget.title,
-          actions: widget.actions,
+          actions: _actions,
           actionsIconTheme: widget.actionsIconTheme,
           automaticallyImplyLeading: widget.automaticallyImplyLeading,
           backgroundColor: widget.backgroundColor,
           bottom: widget.bottom,
           bottomOpacity: widget.bottomOpacity,
-          brightness: widget.brightness,
           elevation: 0.0,
           flexibleSpace: widget.flexibleSpace,
           iconTheme: widget.iconTheme,
           primary: widget.primary,
           shape: widget.shape,
-          textTheme: widget.textTheme,
+          titleTextStyle: widget.textStyle,
           titleSpacing: widget.titleSpacing,
           toolbarOpacity: widget.toolbarOpacity,
         ),
@@ -101,13 +98,14 @@ class _AMAppBarState extends State<AMAppBar> {
     );
   }
 
-  Widget get _leading {
-    final ScaffoldState scaffold = Scaffold.of(context);
-    final ModalRoute<dynamic> parentRoute = ModalRoute.of(context);
+  Widget? get _leading {
+    final ScaffoldState? scaffold = Scaffold.of(context);
+    final ModalRoute<dynamic>? parentRoute = ModalRoute.of(context);
 
     final bool hasDrawer = scaffold?.hasDrawer ?? false;
     final bool canPop = parentRoute?.canPop ?? false;
-    final bool useCloseButton = parentRoute is PageRoute<dynamic> && parentRoute.fullscreenDialog;
+    final bool useCloseButton =
+        parentRoute is PageRoute<dynamic> && parentRoute.fullscreenDialog;
 
     if (widget.leading == null && widget.automaticallyImplyLeading) {
       if (hasDrawer) {
@@ -137,16 +135,18 @@ class _AMAppBarState extends State<AMAppBar> {
     return widget.leading;
   }
 
-  List<Widget> get actions {
-    final ScaffoldState scaffold = Scaffold.of(context);
+  List<Widget>? get _actions {
+    final ScaffoldState? scaffold = Scaffold.of(context);
     final bool hasEndDrawer = scaffold?.hasEndDrawer ?? false;
 
-    if ((widget.actions == null || widget.actions.isEmpty) && hasEndDrawer) {
-      return [IconButton(
-        icon: const Icon(Icons.menu),
-        onPressed: _handleDrawerButtonEnd,
-        tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
-      )];
+    if ((widget.actions == null || widget.actions!.isEmpty) && hasEndDrawer) {
+      return [
+        IconButton(
+          icon: const Icon(Icons.menu),
+          onPressed: _handleDrawerButtonEnd,
+          tooltip: MaterialLocalizations.of(context).openAppDrawerTooltip,
+        ),
+      ];
     } else {
       return widget.actions;
     }

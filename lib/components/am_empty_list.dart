@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 
 class AMEmptyList extends StatelessWidget {
   final String message;
-  final double topMargin;
+  final double? topMargin;
 
-  const AMEmptyList({Key key, @required this.message, this.topMargin}) : super(key: key);
+  const AMEmptyList({
+    Key? key,
+    required this.message,
+    this.topMargin,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

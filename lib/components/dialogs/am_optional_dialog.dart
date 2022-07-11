@@ -2,42 +2,44 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class OptionalResult {
-  final bool generalResult;
-  final Map<String, bool> options;
+  final bool? generalResult;
+  final Map<String, bool>? options;
 
-  OptionalResult({this.generalResult, this.options});
+  OptionalResult({
+    this.generalResult,
+    this.options,
+  });
 }
 
 class AMOptionalDialog extends StatefulWidget {
-  final String title;
-  final String description;
+  final String? title;
+  final String? description;
   final Map<String, bool> options;
   final String actionText;
   final String cancelText;
-  final List<Widget> actions;
+  final List<Widget>? actions;
 
   const AMOptionalDialog({
     this.title,
     this.description,
-    @required this.options,
-    @required this.actionText,
-    @required this.cancelText,
+    required this.options,
+    this.actionText = "OK",
+    this.cancelText = "Cancel",
     this.actions,
   });
 
-  static Future<OptionalResult> show({
-    BuildContext context,
-    String title,
-    String description,
-    Map<String, bool> options,
-    String actionText,
-    String cancelText,
-    List<Widget> actions,
+  static Future<OptionalResult?> show({
+    required BuildContext context,
+    String? title,
+    String? description,
+    required Map<String, bool> options,
+    required String actionText,
+    required String cancelText,
+    List<Widget>? actions,
   }) {
-    return showCupertinoDialog(
+    return showCupertinoDialog<OptionalResult>(
         context: context,
-        builder: (_) =>
-            AMOptionalDialog(
+        builder: (_) => AMOptionalDialog(
               title: title,
               description: description,
               options: options,
@@ -52,12 +54,12 @@ class AMOptionalDialog extends StatefulWidget {
 }
 
 class _OptionalDialogState extends State<AMOptionalDialog> {
-  String title;
-  String description;
-  Map<String, bool> options;
-  String actionText;
-  String cancelText;
-  List<Widget> actions;
+  String? title;
+  String? description;
+  late Map<String, bool> options;
+  late String actionText;
+  late String cancelText;
+  List<Widget>? actions;
 
   @override
   void initState() {
@@ -76,7 +78,7 @@ class _OptionalDialogState extends State<AMOptionalDialog> {
       if (description != null)
         Padding(
           padding: const EdgeInsets.only(bottom: 16),
-          child: Text(description),
+          child: Text(description!),
         )
     ];
     for (final key in options.keys) {
@@ -101,28 +103,26 @@ class _OptionalDialogState extends State<AMOptionalDialog> {
       children.add(row);
     }
     return AlertDialog(
-      title: title == null ? null : Text(title),
+      title: title == null ? null : Text(title!),
       content: Column(
         mainAxisSize: MainAxisSize.min,
         children: children,
       ),
       actions: <Widget>[
-        FlatButton(
-          child: Text(cancelText ?? "Cancel"),
-          onPressed: () =>
-              Navigator.pop(
-                context,
-                OptionalResult(generalResult: false, options: options),
-              ),
+        TextButton(
+          child: Text(cancelText),
+          onPressed: () => Navigator.pop(
+            context,
+            OptionalResult(generalResult: false, options: options),
+          ),
         ),
-        if (actions != null) ...actions,
-        FlatButton(
-          child: Text(actionText ?? "OK"),
-          onPressed: () =>
-              Navigator.pop(
-                context,
-                OptionalResult(generalResult: true, options: options),
-              ),
+        if (actions != null) ...actions!,
+        TextButton(
+          child: Text(actionText),
+          onPressed: () => Navigator.pop(
+            context,
+            OptionalResult(generalResult: true, options: options),
+          ),
         ),
       ],
     );
@@ -130,7 +130,7 @@ class _OptionalDialogState extends State<AMOptionalDialog> {
 
   void _onTapOption(String key) {
     setState(() {
-      options[key] = !options[key];
+      options[key] = !(options[key] ?? false);
     });
   }
 }

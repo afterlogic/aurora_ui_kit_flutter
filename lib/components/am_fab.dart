@@ -1,44 +1,44 @@
 import 'package:flutter/material.dart';
 
 class AMFloatingActionButton extends StatelessWidget {
+  final Key? key;
+  final void Function()? onPressed;
+  final Widget? child;
   final bool autofocus;
-  final Color backgroundColor;
-  final Widget child;
-  final BoxShadow shadow;
+  final Color? backgroundColor;
   final Clip clipBehavior;
-  final Color focusColor;
-  final FocusNode focusNode;
-  final Color foregroundColor;
+  final Color? focusColor;
+  final FocusNode? focusNode;
+  final BoxShadow? shadow;
+  final Color? foregroundColor;
   final Object heroTag;
-  final Color hoverColor;
+  final Color? hoverColor;
   final bool isExtended;
-  final Key key;
-  final MaterialTapTargetSize materialTapTargetSize;
+  final MaterialTapTargetSize? materialTapTargetSize;
   final bool mini;
-  final void Function() onPressed;
-  final ShapeBorder shape;
-  final Color splashColor;
-  final String tooltip;
+  final ShapeBorder? shape;
+  final Color? splashColor;
+  final String? tooltip;
 
   const AMFloatingActionButton({
     this.key,
+    required this.onPressed,
+    required this.child,
     this.autofocus = false,
     this.backgroundColor,
     this.clipBehavior = Clip.none,
     this.focusColor,
-    this.shadow,
     this.focusNode,
+    this.shadow,
     this.foregroundColor,
     this.heroTag = const _DefaultHeroTag(),
     this.hoverColor,
     this.isExtended = false,
     this.materialTapTargetSize,
     this.mini = false,
-    @required this.onPressed,
     this.shape,
     this.splashColor,
     this.tooltip,
-    this.child,
   }) : super(key: key);
 
   @override
@@ -52,7 +52,8 @@ class AMFloatingActionButton extends StatelessWidget {
             : [
                 shadow ??
                     BoxShadow(
-                      color: theme.floatingActionButtonTheme.hoverColor,
+                      color: theme.floatingActionButtonTheme.hoverColor ??
+                          theme.primaryColor,
                       blurRadius: 8.0,
                       offset: Offset(0.0, 3.0),
                     ),
