@@ -62,7 +62,7 @@ class AMButton extends StatelessWidget {
       height: 50.0,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(50.0),
-        boxShadow: isLoading == true
+        boxShadow: isLoading == true || onPressed == null
             ? null
             : [
                 shadow ??
