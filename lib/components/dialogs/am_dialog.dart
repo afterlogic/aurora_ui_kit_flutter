@@ -6,6 +6,7 @@ class AMDialog extends StatelessWidget {
   final Color? backgroundColor;
   final Widget? content;
   final EdgeInsetsGeometry contentPadding;
+  final EdgeInsets insetPadding;
   final TextStyle? contentTextStyle;
   final double? elevation;
   final String? semanticLabel;
@@ -20,6 +21,8 @@ class AMDialog extends StatelessWidget {
     this.backgroundColor,
     this.content,
     this.contentPadding = const EdgeInsets.fromLTRB(24.0, 20.0, 24.0, 24.0),
+    this.insetPadding = const EdgeInsets.symmetric(
+        horizontal: 40.0, vertical: 24.0),
     this.contentTextStyle,
     this.elevation,
     this.semanticLabel,
@@ -47,6 +50,7 @@ class AMDialog extends StatelessWidget {
       backgroundColor: backgroundColor,
       content: content,
       contentPadding: contentPadding,
+      insetPadding: insetPadding,
       contentTextStyle: contentTextStyle,
       elevation: elevation,
       semanticLabel: semanticLabel,
