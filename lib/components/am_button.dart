@@ -10,6 +10,7 @@ class AMButton extends StatelessWidget {
   final Clip clipBehavior;
   final Color? color;
   final BoxShadow? shadow;
+  final BorderRadius? radius;
   final FocusNode? focusNode;
   final double height;
   final EdgeInsetsGeometry padding;
@@ -25,6 +26,7 @@ class AMButton extends StatelessWidget {
     this.clipBehavior = Clip.none,
     this.color,
     this.shadow,
+    this.radius,
     this.focusNode,
     this.height = 50,
     this.padding = EdgeInsets.zero,
@@ -38,7 +40,7 @@ class AMButton extends StatelessWidget {
       height: height,
       padding: padding,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(50.0),
+        borderRadius: radius ?? BorderRadius.circular(50.0),
         boxShadow: isLoading == true || onPressed == null
             ? null
             : [
@@ -73,7 +75,7 @@ class AMButton extends StatelessWidget {
           elevation: MaterialStateProperty.all(0),
           shape: MaterialStateProperty.all(
             RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(50.0),
+              borderRadius: radius ?? BorderRadius.circular(50.0),
             ),
           ),
           animationDuration: animationDuration,
